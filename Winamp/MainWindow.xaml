@@ -1,0 +1,216 @@
+﻿<Window x:Class="Winamp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Winamp"
+        mc:Ignorable="d"
+        Title="Mixer" Height="650" Width="620" ResizeMode="NoResize" Icon="icon3.png">
+
+
+    <Window.Resources>
+        <Style x:Key="StyleBtnBlueGradient" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="AliceBlue" Offset="0"></GradientStop>
+                        <GradientStop Color="Cyan" Offset="0.9"></GradientStop>
+                        
+ 
+                    </LinearGradientBrush>
+                    
+                    
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="BlueViolet"></Setter>
+            <Setter Property="Margin" Value="5,0,5,0"></Setter>
+
+        </Style>
+
+        <Image x:Key="playImg" Source="play.png"></Image>
+        <Image x:Key="pauseImg" Source="pause.png"></Image>
+        <Image x:Key="nextImg" Source="next.png" Stretch="UniformToFill" VerticalAlignment="Center" Margin="7,0,0,0"></Image>
+        <Image x:Key="backImg" Source="back.png" Stretch="UniformToFill" VerticalAlignment="Center" Margin="0,0,7,0"></Image>
+        <Image x:Key="stopImg" Source="stop.png" Stretch="UniformToFill" VerticalAlignment="Center" Margin="1,0,1,0"></Image>
+        <Image x:Key="uploadImg" Source="upload.png" Stretch="UniformToFill" VerticalAlignment="Center" Margin="1,0,1,0"></Image>
+
+
+
+
+
+    </Window.Resources>
+    <Grid Background="Gray">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Margin="2" Background="Aqua" CornerRadius="30">
+            <Grid ShowGridLines="False">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="5.3*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <MediaElement x:Name="media" IsMuted="False" Grid.Row="0"  LoadedBehavior="Manual" MediaOpened="media_MediaOpened" MediaEnded="media_MediaEnded"  >
+
+
+                </MediaElement>
+                <Grid Grid.Row="1" ShowGridLines="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="7*"></RowDefinition>
+                        <RowDefinition Height="6*"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" ></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock  TextWrapping="Wrap" Grid.Row="0" Grid.Column="0"  Margin="0,0,0,0" Text="Сейчас играет:" TextAlignment="Center"  FontSize="24" VerticalAlignment="Center" FontFamily="Impact"></TextBlock>
+                    <TextBlock  TextWrapping="Wrap"  x:Name="tbMediaName" Grid.Row="0" Grid.Column="1"  Margin="0,0,0,0" Text="" FontSize="24" VerticalAlignment="Center" FontFamily="Impact"></TextBlock>
+                    <TextBlock  TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  Margin="0,0,0,0" Text="Выбрано:" TextAlignment="Center"  Padding="0,0,54,0" FontSize="24" VerticalAlignment="Center" FontFamily="Impact"></TextBlock>
+                    <TextBlock  TextWrapping="Wrap"  x:Name="tbSelected" Grid.Row="1" Grid.Column="1"  Margin="0,0,0,0" Text="" FontSize="24" VerticalAlignment="Center" FontFamily="Impact"></TextBlock>
+                    <Slider VerticalAlignment="Bottom" Margin="10,0,10,20" Grid.Row="2" Grid.Column="1"  Minimum="0" Name="sliderPosition" LostMouseCapture="sliderPosition_LostMouseCapture" GotMouseCapture="sliderPosition_GotMouseCapture"/>
+
+
+
+
+
+
+
+
+                </Grid>
+                
+                <Border Background="Cyan" Grid.Row="2" Margin="2" BorderThickness="4" BorderBrush="Black" CornerRadius="0,0,30,30"  >
+                    <Grid ShowGridLines="False" >
+                        
+
+                        <StackPanel Orientation="Horizontal" Margin="0,2.5,0,2.5">
+                            <StackPanel.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="Margin" Value="5,0,5,0"></Setter>
+                                </Style>
+
+                            </StackPanel.Resources>
+                            <Button x:Name="btnBack" Width="50" Style="{DynamicResource StyleBtnBlueGradient}" Click="btnBack_Click">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="20"></Setter>
+
+                                    </Style>
+                                </Button.Resources>
+                                <DynamicResource ResourceKey="backImg"></DynamicResource>
+
+                            </Button>
+
+
+
+                            <Button x:Name="btnPlay" Width="50"   Click="btnStart_Click" Style="{DynamicResource StyleBtnBlueGradient}">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="20"></Setter>
+
+                                    </Style>
+
+                                </Button.Resources>
+                                <DynamicResource x:Name="btnTbPlay" ResourceKey="playImg" ></DynamicResource>
+                            </Button>
+                            
+                            <Button x:Name="btnNext" Width="50" Style="{DynamicResource StyleBtnBlueGradient}" Click="btnNext_Click" >
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="20"></Setter>
+
+                                    </Style>
+
+                                </Button.Resources>
+                                <DynamicResource ResourceKey="nextImg"></DynamicResource>
+                            </Button>
+                            <Button Width="50" x:Name="btnStop"  Click="btnStop_Click" Style="{DynamicResource StyleBtnBlueGradient}">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="20"></Setter>
+
+                                    </Style>
+                                </Button.Resources>
+                                <DynamicResource ResourceKey="stopImg"></DynamicResource>
+                            </Button>
+                            <Button x:Name="btnUpload" Width="40"  Click="btnUpload_Click" Style="{DynamicResource StyleBtnBlueGradient}">
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="20"/>
+
+                                    </Style>
+
+                                </Button.Resources>
+                                <DynamicResource ResourceKey="uploadImg"></DynamicResource>
+                            </Button>
+
+                            <Button x:Name="btnAdd" Width="30" Style="{DynamicResource StyleBtnBlueGradient}"  Click="btnAdd_Click">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="15"></Setter>
+                                    </Style>
+                                    
+                                </Button.Resources>
+                                <Image Source="Add.png" Margin="5,0,5,0" ></Image>
+                                
+                            </Button>
+
+                            <Image Source="Volume.png"  >
+                            </Image>
+                            <Slider x:Name="slVolume" Orientation="Horizontal" Margin="5,0,5,0" Minimum="0" Value="50" Maximum="100" Width="180" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True"  TickPlacement="BottomRight" ValueChanged="Slider_ValueChanged" >
+                                
+                                
+                            </Slider>
+
+
+                        </StackPanel>
+
+
+                    </Grid>
+
+
+                </Border>
+
+            </Grid>
+
+
+        </Border>
+
+
+
+        <Border Grid.Row="1" Margin="2" Background="Beige" CornerRadius="15">
+            <Grid ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="48*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+
+
+
+
+                
+                <Border Grid.Row="1" Margin="5" CornerRadius="0,0,5,5" BorderBrush="Black" BorderThickness="6,15,6,6" Background="White">
+
+  
+                    <ListBox  x:Name="ListOfRecipes" ItemsSource="{Binding FilesOfRecipes, Mode=OneWay}" Background="Blue" Foreground="White" SelectionChanged="ListOfRecipes_SelectionChanged">
+                        
+                    </ListBox>
+
+                </Border>
+
+
+            </Grid>
+
+
+
+        </Border>
+
+
+    </Grid>
+</Window>
