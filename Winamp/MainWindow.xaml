@@ -14,7 +14,7 @@
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Color="AliceBlue" Offset="0"></GradientStop>
-                        <GradientStop Color="Cyan" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#FFFF1700" Offset="0.9"></GradientStop>
                         
  
                     </LinearGradientBrush>
